@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-step1',
@@ -9,13 +8,25 @@ import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
 })
 export class Step1Component implements OnInit {
 
-  constructor(
-    private navController: NavController) { }
+  public errorMsg = '';
 
-  ngOnInit() {}
+  constructor() { }
 
-  next() {
-    this.navController.navigateRoot('step2');
+  ngOnInit() {
+  }
+
+  handleClick(event) {
+    this.errorMsg = 'Error';
+    try {
+      void Keyboard.hide();
+      event.target.blur();
+    } catch {
+      console.log('Activated web view.');
+    }
+  }
+
+  clearErrorMessage() {
+    this.errorMsg = '';
   }
 
 }

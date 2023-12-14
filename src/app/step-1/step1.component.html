@@ -10,7 +10,18 @@
   
   <div>
     <p>Content</p>
-    <ion-button (click)="next()">Next</ion-button>
-    
+    <form #codeField action="#">
+      <ion-row *ngIf="errorMsg !== ''">
+        <ion-col class="error" size="12">
+          <ion-label>{{errorMsg}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'error': errorMsg !== ''}" class="input_row">
+        <ion-col size="12">
+          <ion-input #inputField (keyup.enter)="handleClick($event)" (ionFocus)="clearErrorMessage()" placeholder="text"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-button (click)="handleClick(inputField)" mode="ios">Continue</ion-button>
+    </form>
   </div>
 </ion-content>
